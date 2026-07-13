@@ -1,0 +1,248 @@
+aid: myfatoorah
+url: https://raw.githubusercontent.com/api-evangelist/myfatoorah/refs/heads/main/apis.yml
+name: MyFatoorah
+kind: company
+description: MyFatoorah is a Kuwait-based online payment gateway and invoicing platform
+  serving merchants across the GCC and wider MENA region (Kuwait, Saudi Arabia, UAE,
+  Qatar, Egypt, Bahrain, Oman, and Jordan). Its REST API lets businesses create
+  invoices and payment links, execute and direct-charge card payments, run embedded
+  checkout sessions, issue refunds, manage recurring payments, onboard marketplace
+  suppliers, calculate shipping, and receive webhook notifications. MyFatoorah
+  aggregates regional and international payment methods including KNET, mada,
+  Benefit, Meeza, OmanNet, Visa, Mastercard, American Express, Apple Pay, Google
+  Pay, and STC Pay. The API is region-scoped - a shared test host plus per-country
+  live hosts - and authenticated with a Bearer API token.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- Payment Gateway
+- Kuwait
+- GCC
+- MENA
+- KNET
+- mada
+- Benefit
+- Invoices
+- Cards
+- Fintech
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: myfatoorah:myfatoorah-payments-api
+  name: MyFatoorah Payments API
+  tags:
+  - Payments
+  - Cards
+  - KNET
+  - Checkout
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/execute-payment
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/initiate-payment
+    type: Documentation
+  - url: https://docs.myfatoorah.com/reference
+    type: APIReference
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Discover enabled payment methods and their service charges
+    (InitiatePayment), then create an invoice against a chosen gateway and get a
+    hosted PaymentURL (ExecutePayment). Supports KNET, mada, Benefit, Visa,
+    Mastercard, Apple Pay, Google Pay, and other regional methods, with optional
+    direct card charging.
+- aid: myfatoorah:myfatoorah-invoicing-api
+  name: MyFatoorah Invoicing API
+  tags:
+  - Invoices
+  - Payment Links
+  - Billing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/send-payment
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/send-payment
+    type: Documentation
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Create a MyFatoorah invoice and generate a shareable payment link
+    (SendPayment), delivered to the customer by email, SMS, or link, with line
+    items, display currency, and success/error callback URLs.
+- aid: myfatoorah:myfatoorah-payment-status-api
+  name: MyFatoorah Payment Status API
+  tags:
+  - Payment Status
+  - Inquiry
+  - Reconciliation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/get-payment-status
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/get-payment-status
+    type: Documentation
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Verify whether an invoice was paid and retrieve its transactions by
+    InvoiceId, PaymentId, or CustomerReference (GetPaymentStatus). Returns invoice
+    status plus masked card, gateway, authorization, and error details for
+    reconciliation.
+- aid: myfatoorah:myfatoorah-refunds-api
+  name: MyFatoorah Refunds API
+  tags:
+  - Refunds
+  - Reversals
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/make-refund
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/make-refund
+    type: Documentation
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Issue full or partial refunds against a paid invoice or payment
+    (MakeRefund), track refund processing (GetRefundStatus), and handle
+    marketplace supplier refunds (MakeSupplierRefund).
+- aid: myfatoorah:myfatoorah-embedded-sessions-api
+  name: MyFatoorah Embedded Sessions API
+  tags:
+  - Embedded Payment
+  - Sessions
+  - Tokenization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/initiate-session
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/initiate-session
+    type: Documentation
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Create a session for the embedded/hosted card-entry component
+    (InitiateSession), then execute it, and manage saved-card tokens (CancelToken).
+    Powers PCI-friendly in-page checkout that keeps card data off the merchant
+    server.
+- aid: myfatoorah:myfatoorah-suppliers-api
+  name: MyFatoorah Suppliers API
+  tags:
+  - Marketplace
+  - Suppliers
+  - Split Payments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/reference
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/reference
+    type: APIReference
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Onboard and manage marketplace suppliers for split settlements -
+    create and edit suppliers, list them and their details, set per-method
+    commissions, transfer balances, and view supplier deposits and dashboards.
+- aid: myfatoorah:myfatoorah-shipping-api
+  name: MyFatoorah Shipping API
+  tags:
+  - Shipping
+  - Logistics
+  - DHL
+  - Aramex
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/docs/shipping-sample-code
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/docs/shipping-sample-code
+    type: Documentation
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Look up shipping countries and cities, calculate DHL/Aramex shipping
+    charges, request pickups, update shipping status, and list shipping orders
+    alongside a MyFatoorah invoice.
+- aid: myfatoorah:myfatoorah-recurring-payments-api
+  name: MyFatoorah Recurring Payments API
+  tags:
+  - Recurring
+  - Subscriptions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/reference
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/reference
+    type: APIReference
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Manage recurring card payments - retrieve a recurring payment record
+    (GetRecurringPayment), cancel a schedule (CancelRecurringPayment), and resume
+    or retry a failed cycle (ResumeRecurringPayment).
+- aid: myfatoorah:myfatoorah-webhooks-api
+  name: MyFatoorah Webhooks API
+  tags:
+  - Webhooks
+  - Notifications
+  - Events
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.myfatoorah.com/reference
+  baseURL: https://api.myfatoorah.com/v2
+  properties:
+  - url: https://docs.myfatoorah.com/reference
+    type: APIReference
+  - url: openapi/myfatoorah-openapi.yml
+    type: OpenAPI
+  - url: collections/myfatoorah.postman_collection.json
+    type: PostmanCollection
+  - url: collections/myfatoorah.opencollection.json
+    type: OpenCollection
+  description: Retrieve webhook events MyFatoorah has triggered (GetWebhooks).
+    MyFatoorah delivers transaction and refund status changes as HTTP POST
+    callbacks to a merchant-configured endpoint; there is no WebSocket transport.
+common:
+- type: DomainSecurity
+  url: security/myfatoorah-domain-security.yml
+- type: Authentication
+  url: authentication/myfatoorah-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/MyFatoorahHub
+- type: LinkedIn
+  url: https://www.linkedin.com/company/myfatoorah
+- type: Website
+  url: https://myfatoorah.com/
+- type: Documentation
+  url: https://docs.myfatoorah.com/
+- type: Plans
+  url: plans/myfatoorah-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/myfatoorah-rate-limits.yml
+- type: FinOps
+  url: finops/myfatoorah-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

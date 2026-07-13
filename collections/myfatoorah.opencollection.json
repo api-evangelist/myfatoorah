@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{apiToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Payments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "InitiatePayment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/InitiatePayment",
+            "body": { "type": "json", "data": "{\n  \"InvoiceAmount\": 10,\n  \"CurrencyIso\": \"KWD\"\n}" }
+          },
+          "docs": "Returns enabled payment methods and their service charges for an amount/currency."
+        },
+        {
+          "info": { "name": "ExecutePayment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ExecutePayment",
+            "body": { "type": "json", "data": "{\n  \"PaymentMethodId\": 2,\n  \"InvoiceValue\": 10,\n  \"CallBackUrl\": \"https://example.com/success\",\n  \"ErrorUrl\": \"https://example.com/error\",\n  \"CustomerName\": \"Test Customer\"\n}" }
+          },
+          "docs": "Creates an invoice against a gateway and returns a hosted PaymentURL."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoicing", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "SendPayment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/SendPayment",
+            "body": { "type": "json", "data": "{\n  \"InvoiceValue\": 10,\n  \"CustomerName\": \"Test Customer\",\n  \"NotificationOption\": \"LNK\",\n  \"DisplayCurrencyIso\": \"KWD\",\n  \"CallBackUrl\": \"https://example.com/success\",\n  \"ErrorUrl\": \"https://example.com/error\"\n}" }
+          },
+          "docs": "Creates an invoice and generates a shareable payment link (InvoiceURL)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Payment Status", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "GetPaymentStatus", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/GetPaymentStatus",
+            "body": { "type": "json", "data": "{\n  \"Key\": \"1234567\",\n  \"KeyType\": \"InvoiceId\"\n}" }
+          },
+          "docs": "Verifies whether an invoice was paid and returns its transactions."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Refunds", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "MakeRefund", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/MakeRefund",
+            "body": { "type": "json", "data": "{\n  \"KeyType\": \"InvoiceId\",\n  \"Key\": \"1234567\",\n  \"Amount\": 5,\n  \"Comment\": \"Partial refund\"\n}" }
+          },
+          "docs": "Issues a full or partial refund against a paid invoice or payment."
+        },
+        {
+          "info": { "name": "GetRefundStatus (modeled)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/GetRefundStatus",
+            "body": { "type": "json", "data": "{\n  \"KeyType\": \"InvoiceId\",\n  \"Key\": \"1234567\"\n}" }
+          },
+          "docs": "MODELED: documented by name; request shape is representative. Tracks refund processing status."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Sessions (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "InitiateSession", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/InitiateSession",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "MODELED: creates an embedded card-entry session (SessionId, CountryCode)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Suppliers (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "GetSuppliers", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/GetSuppliers",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "MODELED: lists marketplace suppliers configured for split settlement."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Shipping (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "GetCities", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/GetCities",
+            "body": { "type": "json", "data": "{\n  \"CountryCode\": \"KWT\",\n  \"ShippingMethod\": 1\n}" }
+          },
+          "docs": "MODELED: retrieves cities belonging to a country for shipping."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Recurring (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "CancelRecurringPayment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/CancelRecurringPayment",
+            "body": { "type": "json", "data": "{\n  \"RecurringId\": \"\"\n}" }
+          },
+          "docs": "MODELED: stops future cycles of a recurring card payment."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks (modeled)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "GetWebhooks", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/GetWebhooks",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "MODELED: returns webhook events MyFatoorah has triggered. Delivery is via HTTP POST callbacks, not WebSocket."
+        }
+      ]
+    }
+  ]
+}

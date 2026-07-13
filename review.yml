@@ -1,0 +1,107 @@
+aid: myfatoorah
+name: MyFatoorah
+review:
+  question: Does MyFatoorah expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. MyFatoorah's public API is entirely
+    request/response REST over HTTPS. Its asynchronous surface is HTTP POST
+    webhook callbacks (transaction and refund status changes) delivered to a
+    merchant-configured URL - a server-to-endpoint HTTP push, not a WebSocket or
+    SSE stream on MyFatoorah's own API. There is no server-push channel on
+    MyFatoorah's own host to model, so no AsyncAPI spec was created.
+findings:
+  summary: |
+    MyFatoorah does not publish a documented public WebSocket API. MyFatoorah is
+    a GCC/MENA payment gateway and invoicing platform whose v2 API is pure REST
+    over HTTPS, authenticated with a Bearer API token issued per country. All
+    documented operations (InitiatePayment, ExecutePayment, SendPayment,
+    GetPaymentStatus, MakeRefund, sessions, suppliers, shipping, recurring,
+    webhooks) are POST requests under a /v2 path. Asynchronous notifications are
+    delivered as HTTP POST webhooks to a merchant endpoint; MyFatoorah also
+    supports polling GetPaymentStatus. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint is documented anywhere in the MyFatoorah
+    developer docs as of the review date.
+  accessModel: |
+    Region-scoped hosts. A single shared TEST/sandbox host
+    (https://apitest.myfatoorah.com) serves all regions with a published demo
+    Bearer token. LIVE traffic uses per-country hosts: Kuwait/Bahrain/Jordan/Oman
+    share https://api.myfatoorah.com; Saudi Arabia https://api-sa.myfatoorah.com;
+    UAE https://api-ae.myfatoorah.com; Qatar https://api-qa.myfatoorah.com;
+    Egypt https://api-eg.myfatoorah.com. Each enabled country requires its own
+    token; endpoints the token lacks permission for return 401.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.myfatoorah.com/v2
+      documented: true
+      note: Live host for Kuwait/Bahrain/Jordan/Oman. Per-country live hosts and a shared apitest host also exist.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: MyFatoorah POSTs transaction/refund status-change events to a merchant-configured endpoint. GetWebhooks retrieves triggered events. HTTP push, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the MyFatoorah API reference or any product page as of the review date.
+  endpointsConfirmedRest:
+    - POST /v2/InitiatePayment
+    - POST /v2/ExecutePayment
+    - POST /v2/SendPayment
+    - POST /v2/GetPaymentStatus
+    - POST /v2/MakeRefund
+  endpointsModeledRest:
+    - POST /v2/GetRefundStatus
+    - POST /v2/MakeSupplierRefund
+    - POST /v2/InitiateSession
+    - POST /v2/CancelToken
+    - POST /v2/GetSuppliers
+    - POST /v2/GetCities
+    - POST /v2/GetRecurringPayment
+    - POST /v2/CancelRecurringPayment
+    - POST /v2/GetWebhooks
+  modeledNote: |
+    "Confirmed" endpoints have method, path, and core request/response fields
+    grounded in the public docs (send-payment, execute-payment, initiate-payment,
+    get-payment-status, make-refund reference pages). "Modeled" endpoints are
+    documented by name in the MyFatoorah reference and follow the observed
+    /v2/<Endpoint> POST convention, but their request/response schemas in the
+    OpenAPI are representative shapes (marked x-status: modeled) pending
+    field-level confirmation.
+sources:
+  - url: https://docs.myfatoorah.com/docs/get-started
+    type: Documentation
+    note: Bearer auth; test vs live environments; region model. All REST.
+  - url: https://docs.myfatoorah.com/docs/api-key
+    type: Documentation
+    note: API & Portal URLs table (per-country hosts) and token issuance/permissions.
+  - url: https://docs.myfatoorah.com/docs/initiate-payment
+    type: APIReference
+    note: POST /v2/InitiatePayment - payment method discovery with service charges.
+  - url: https://docs.myfatoorah.com/docs/execute-payment
+    type: APIReference
+    note: POST /v2/ExecutePayment - invoice against gateway, returns PaymentURL.
+  - url: https://docs.myfatoorah.com/docs/send-payment
+    type: APIReference
+    note: POST /v2/SendPayment - invoice + payment link (InvoiceURL).
+  - url: https://docs.myfatoorah.com/docs/get-payment-status
+    type: APIReference
+    note: POST /v2/GetPaymentStatus - inquiry by InvoiceId/PaymentId/CustomerReference; rate limited.
+  - url: https://docs.myfatoorah.com/docs/make-refund
+    type: APIReference
+    note: POST /v2/MakeRefund - full/partial refund. No WebSocket anywhere.
+  - url: https://docs.myfatoorah.com/reference
+    type: APIReference
+    note: Full endpoint index (sessions, suppliers, shipping, recurring, webhooks). All REST/POST.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. MyFatoorah's public API is
+    request/response REST plus HTTP POST webhook callbacks. No AsyncAPI document
+    was created because there is no WebSocket or SSE server-push transport on
+    MyFatoorah's own API to model; webhook delivery is ordinary HTTP to a
+    merchant endpoint.

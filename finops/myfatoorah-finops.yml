@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: MyFatoorah
+providerId: myfatoorah
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- KNET
+- mada
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of MyFatoorah spend. MyFatoorah is a payment aggregator, so the
+  cost model is not API-usage billing but per-transaction processing fees deducted
+  from settlements. The dominant, and often only, cost is the processing fee taken
+  on each successful collection, which varies by payment method (KNET, mada,
+  Benefit, Meeza, OmanNet, Visa, Mastercard, Amex, Apple Pay, Google Pay, STC Pay)
+  and by country (Kuwait, Saudi Arabia, UAE, Qatar, Egypt, Bahrain, Oman, Jordan).
+  Refunds may return or retain the service charge depending on the
+  ServiceChargeOnCustomer flag, and marketplace flows split fees across suppliers.
+  There is no charge for the REST API itself.
+notes: >-
+  Per-method, per-country rates are not reconciled here and are set in each
+  merchant's agreement (negotiable by volume). Representative public figures cite
+  ~2% KNET and ~3.5% international cards in Kuwait. Model your effective take rate
+  from your own settlement reports, not from list rates.
+sources:
+- https://myfatoorah.com/
+- https://docs.myfatoorah.com/docs/get-started
+- https://docs.myfatoorah.com/docs/make-refund
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: MyFatoorah
+serviceCategory: Payments and Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per-Transaction (netted at settlement)
+  billingCurrency: Multi-currency (KWD, SAR, AED, QAR, EGP, BHD, OMR, JOD)
+  chargeCategories:
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: MyFatoorah Payment Gateway
+  ServiceCategory: Payments and Financial Services
+  ProviderName: MyFatoorah
+  PublisherName: MyFatoorah
+  InvoiceIssuerName: MyFatoorah
+  BillingCurrency: Multi-currency
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: transaction_fee
+  description: Processing fee taken on each successful collection, by payment method and country.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - country
+  - payment_method
+  - currency
+- name: refund_service_charge
+  description: Service charge behavior on refunds, governed by the ServiceChargeOnCustomer flag.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - country
+  - payment_method
+- name: supplier_commission
+  description: Marketplace commission apportioned across suppliers on split settlements.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - supplier
+  - payment_method
+principles:
+- name: Visibility
+  description: Track effective take rate per country and payment method from settlement/webhook data rather than list rates.
+- name: Allocation
+  description: Tag transactions by country, method, and supplier so processing fees map to products and cost centers.
+- name: Optimization
+  description: Route customers toward lower-fee local schemes (KNET, mada, Benefit) where suitable, and negotiate volume rates.
+- name: Accountability
+  description: Reconcile monthly settlements against expected fees; review refund service-charge handling per policy.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

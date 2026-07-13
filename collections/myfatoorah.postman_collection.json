@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "MyFatoorah API",
+    "description": "Representative subset of the MyFatoorah v2 REST API. InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are confirmed from public docs; other requests are modeled from documented endpoint names following the /v2/<Endpoint> POST convention. Set baseUrl to the host for your account's country (test: https://apitest.myfatoorah.com/v2).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{apiToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://apitest.myfatoorah.com/v2" },
+    { "key": "apiToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "InitiatePayment",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/InitiatePayment", "host": [ "{{baseUrl}}" ], "path": [ "InitiatePayment" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"InvoiceAmount\": 10,\n  \"CurrencyIso\": \"KWD\"\n}" },
+            "description": "Returns enabled payment methods and their service charges for an amount/currency."
+          }
+        },
+        {
+          "name": "ExecutePayment",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/ExecutePayment", "host": [ "{{baseUrl}}" ], "path": [ "ExecutePayment" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"PaymentMethodId\": 2,\n  \"InvoiceValue\": 10,\n  \"CallBackUrl\": \"https://example.com/success\",\n  \"ErrorUrl\": \"https://example.com/error\",\n  \"CustomerName\": \"Test Customer\"\n}" },
+            "description": "Creates an invoice against a gateway and returns a hosted PaymentURL."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoicing",
+      "item": [
+        {
+          "name": "SendPayment",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/SendPayment", "host": [ "{{baseUrl}}" ], "path": [ "SendPayment" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"InvoiceValue\": 10,\n  \"CustomerName\": \"Test Customer\",\n  \"NotificationOption\": \"LNK\",\n  \"DisplayCurrencyIso\": \"KWD\",\n  \"CallBackUrl\": \"https://example.com/success\",\n  \"ErrorUrl\": \"https://example.com/error\"\n}" },
+            "description": "Creates an invoice and generates a shareable payment link (InvoiceURL)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Status",
+      "item": [
+        {
+          "name": "GetPaymentStatus",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/GetPaymentStatus", "host": [ "{{baseUrl}}" ], "path": [ "GetPaymentStatus" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"Key\": \"1234567\",\n  \"KeyType\": \"InvoiceId\"\n}" },
+            "description": "Verifies whether an invoice was paid and returns its transactions."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Refunds",
+      "item": [
+        {
+          "name": "MakeRefund",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/MakeRefund", "host": [ "{{baseUrl}}" ], "path": [ "MakeRefund" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"KeyType\": \"InvoiceId\",\n  \"Key\": \"1234567\",\n  \"Amount\": 5,\n  \"Comment\": \"Partial refund\"\n}" },
+            "description": "Issues a full or partial refund against a paid invoice or payment."
+          }
+        },
+        {
+          "name": "GetRefundStatus (modeled)",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/GetRefundStatus", "host": [ "{{baseUrl}}" ], "path": [ "GetRefundStatus" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"KeyType\": \"InvoiceId\",\n  \"Key\": \"1234567\"\n}" },
+            "description": "MODELED: documented by name; request shape is representative."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sessions (modeled)",
+      "item": [
+        {
+          "name": "InitiateSession",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/InitiateSession", "host": [ "{{baseUrl}}" ], "path": [ "InitiateSession" ] },
+            "body": { "mode": "raw", "raw": "{}" },
+            "description": "MODELED: creates an embedded card-entry session (SessionId, CountryCode)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Suppliers (modeled)",
+      "item": [
+        {
+          "name": "GetSuppliers",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/GetSuppliers", "host": [ "{{baseUrl}}" ], "path": [ "GetSuppliers" ] },
+            "body": { "mode": "raw", "raw": "{}" },
+            "description": "MODELED: lists marketplace suppliers configured for split settlement."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shipping (modeled)",
+      "item": [
+        {
+          "name": "GetCities",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/GetCities", "host": [ "{{baseUrl}}" ], "path": [ "GetCities" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"CountryCode\": \"KWT\",\n  \"ShippingMethod\": 1\n}" },
+            "description": "MODELED: retrieves cities belonging to a country for shipping."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recurring (modeled)",
+      "item": [
+        {
+          "name": "CancelRecurringPayment",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/CancelRecurringPayment", "host": [ "{{baseUrl}}" ], "path": [ "CancelRecurringPayment" ] },
+            "body": { "mode": "raw", "raw": "{\n  \"RecurringId\": \"\"\n}" },
+            "description": "MODELED: stops future cycles of a recurring card payment."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks (modeled)",
+      "item": [
+        {
+          "name": "GetWebhooks",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "{{baseUrl}}/GetWebhooks", "host": [ "{{baseUrl}}" ], "path": [ "GetWebhooks" ] },
+            "body": { "mode": "raw", "raw": "{}" },
+            "description": "MODELED: returns webhook events MyFatoorah has triggered. Delivery is via HTTP POST callbacks, not WebSocket."
+          }
+        }
+      ]
+    }
+  ]
+}

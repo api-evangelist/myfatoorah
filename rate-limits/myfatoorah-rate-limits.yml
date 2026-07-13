@@ -1,0 +1,51 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: MyFatoorah
+providerId: myfatoorah
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- Rate Limiting
+- Quotas
+description: >-
+  MyFatoorah does not publish fixed numeric per-endpoint rate limits. The
+  documentation explicitly notes that the GetPaymentStatus inquiry endpoint is
+  rate limited and advises contacting support when sending many requests in a
+  short window, and recommends inquiring by PaymentId rather than polling
+  aggressively. Practically, callers should treat the API as rate-limited,
+  implement backoff, and rely on webhook callbacks for payment/refund status
+  changes instead of tight polling loops.
+notes: >-
+  No published numeric request-per-minute caps as of the review date. The 429
+  response code is the expected throttling signal for HTTP APIs; verify actual
+  limits with MyFatoorah support. Prefer webhooks over polling GetPaymentStatus.
+sources:
+- https://docs.myfatoorah.com/docs/get-payment-status
+- https://docs.myfatoorah.com/docs/get-started
+responseCodes:
+  throttled: 429
+limits:
+- name: GetPaymentStatus Inquiries
+  scope: account
+  metric: requests
+  limit: rate limited (numeric cap not published)
+  notes: Docs warn against high-frequency status polling; inquire by PaymentId and use webhooks.
+- name: General API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric per-endpoint request-rate limit is documented.
+policies:
+- name: Prefer Webhooks
+  description: Use MyFatoorah HTTP POST webhook callbacks for transaction and refund status changes instead of polling GetPaymentStatus.
+- name: Backoff Strategy
+  description: Implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Idempotent Inquiry Keys
+  description: Query status by stable keys (PaymentId, InvoiceId, CustomerReference) to avoid redundant calls.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,23 @@
+generated: '2026-07-12'
+method: derived
+source: openapi/myfatoorah-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    MyFatoorah authenticates every REST request with a Bearer API token passed as
+    `Authorization: Bearer {token}`. Tokens are issued from the MyFatoorah portal
+    (log in with the Super Master Account, then Integration Settings -> API Key);
+    up to five tokens can be created per account with custom names, expiration
+    dates, and per-endpoint permissions. Each enabled country requires its own
+    token, and calling an endpoint the token lacks permission for returns HTTP 401
+    with "The token does not have the required permissions!". A public sandbox
+    demo token is published in the docs for testing against apitest.myfatoorah.com.
+  sources:
+  - openapi/myfatoorah-openapi.yml
+  - https://docs.myfatoorah.com/docs/api-key
+  - https://docs.myfatoorah.com/docs/authentication

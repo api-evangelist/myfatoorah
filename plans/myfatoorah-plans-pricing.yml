@@ -1,0 +1,124 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: MyFatoorah
+providerId: myfatoorah
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- KNET
+- mada
+- Fintech
+- Plans
+description: >-
+  MyFatoorah does not sell API access as tiered SaaS subscriptions; it monetizes
+  as a payment aggregator through per-transaction processing fees that vary by
+  payment method and country, plus a merchant onboarding/KYC process. There is no
+  charge for calling the REST API itself - you pay a percentage (and/or fixed fee)
+  on each successful collection. Published third-party figures put KNET around 2%
+  and international cards around 3.5% in Kuwait, but MyFatoorah states rates are
+  negotiable by volume and differ per country and method, so the entries below are
+  representative and NOT reconciled against an official rate card. Merchants apply,
+  complete KYC, and receive method-level rates in their agreement.
+notes: >-
+  Rates are illustrative and unreconciled. Confirm current per-method, per-country
+  pricing directly with MyFatoorah sales during onboarding. Sandbox access
+  (apitest.myfatoorah.com) is free with a public demo token.
+sources:
+- https://myfatoorah.com/
+- https://docs.myfatoorah.com/docs/get-started
+- https://bilixe.com/listing/myfatoorah/
+plans:
+- id: myfatoorah-sandbox
+  name: Sandbox / Test
+  type: free
+  description: >-
+    Free test environment on apitest.myfatoorah.com using a published demo
+    Bearer token and test cards. No real funds move; full API surface is
+    available for integration testing.
+  entries:
+  - label: Sandbox API Access
+    name: sandbox_access
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Full API Surface
+  - name: Test Cards
+  - name: Public Demo Token
+- id: myfatoorah-merchant
+  name: Merchant (Per-Transaction)
+  type: usage
+  description: >-
+    Live merchant account after KYC. No subscription or per-call API fee; revenue
+    is a processing fee taken per successful transaction, varying by payment
+    method (KNET, mada, Benefit, Visa/Mastercard, Amex, Apple Pay, etc.) and
+    country. Rates are negotiable by volume.
+  entries:
+  - label: KNET Transaction Fee (Kuwait, representative)
+    name: knet_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: month
+    geo: KW
+    unit: 1
+    price: ~2% per transaction (representative, unreconciled; negotiable)
+    userMultiplied: false
+  - label: International Card Fee (representative)
+    name: card_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~3.5% per transaction (representative, unreconciled; negotiable)
+    userMultiplied: false
+  - label: Local Scheme Fee (mada / Benefit / Meeza / OmanNet)
+    name: local_scheme_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per-country rate set in merchant agreement (unreconciled)
+    userMultiplied: false
+  elements:
+  - name: Multi-Country Collection
+  - name: Payment Aggregation
+  - name: Marketplace Split Settlement
+  - name: Invoicing and Payment Links
+- id: myfatoorah-enterprise
+  name: Enterprise / Negotiated
+  type: enterprise
+  description: >-
+    Volume merchants and platforms negotiate custom per-method rates, settlement
+    terms, and marketplace/supplier arrangements. Contact MyFatoorah.
+  entries:
+  - label: Negotiated Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Rates
+  - name: Settlement Terms
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
