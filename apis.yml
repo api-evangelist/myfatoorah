@@ -225,6 +225,8 @@ apis:
     MyFatoorah delivers transaction and refund status changes as HTTP POST
     callbacks to a merchant-configured endpoint; there is no WebSocket transport.
 common:
+- type: AgenticAccess
+  url: agentic-access/myfatoorah-agentic-access.yml
 - type: DomainSecurity
   url: security/myfatoorah-domain-security.yml
 - type: Authentication
