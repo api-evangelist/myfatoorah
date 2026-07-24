@@ -1,0 +1,212 @@
+openapi: 3.0.3
+info:
+  title: MyFatoorah Invoicing Payments API
+  description: 'MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.
+
+
+    Access model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account''s country.
+
+
+    Endpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah''s `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.'
+  version: '2.0'
+  contact:
+    name: MyFatoorah
+    url: https://myfatoorah.com
+  x-api-version-note: MyFatoorah versions its REST endpoints under a /v2 path prefix. There is no documented public WebSocket API; asynchronous notifications are delivered as HTTP POST webhooks to a merchant-configured URL.
+servers:
+- url: https://apitest.myfatoorah.com/v2
+  description: Test / Sandbox (shared, all regions)
+- url: https://api.myfatoorah.com/v2
+  description: Live - Kuwait, Bahrain, Jordan, Oman
+- url: https://api-sa.myfatoorah.com/v2
+  description: Live - Saudi Arabia
+- url: https://api-ae.myfatoorah.com/v2
+  description: Live - United Arab Emirates
+- url: https://api-qa.myfatoorah.com/v2
+  description: Live - Qatar
+- url: https://api-eg.myfatoorah.com/v2
+  description: Live - Egypt
+security:
+- bearerAuth: []
+tags:
+- name: Payments
+  description: Discover payment methods and execute payments against a gateway.
+paths:
+  /InitiatePayment:
+    post:
+      operationId: initiatePayment
+      tags:
+      - Payments
+      summary: List enabled payment methods and service charges
+      description: Optional pre-step that returns all payment methods enabled on the account for a given amount and currency, including each method's service charge and total amount. CONFIRMED from public documentation.
+      x-status: confirmed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiatePaymentRequest'
+      responses:
+        '200':
+          description: Available payment methods.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiatePaymentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ExecutePayment:
+    post:
+      operationId: executePayment
+      tags:
+      - Payments
+      summary: Create an invoice against a gateway and get a PaymentURL
+      description: Creates a MyFatoorah invoice against a chosen payment method (or an embedded SessionId) and returns a hosted PaymentURL to redirect the customer to (or to submit card details to for direct payment). CONFIRMED from public documentation.
+      x-status: confirmed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutePaymentRequest'
+      responses:
+        '200':
+          description: Invoice created; PaymentURL returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutePaymentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    InvoiceItem:
+      type: object
+      properties:
+        ItemName:
+          type: string
+        Quantity:
+          type: number
+        UnitPrice:
+          type: number
+    InitiatePaymentRequest:
+      type: object
+      required:
+      - InvoiceAmount
+      - CurrencyIso
+      properties:
+        InvoiceAmount:
+          type: number
+          description: Transaction amount after discounts, taxes, and adjustments.
+        CurrencyIso:
+          type: string
+          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
+          example: KWD
+    ExecutePaymentResponse:
+      allOf:
+      - $ref: '#/components/schemas/GenericResponse'
+      - type: object
+        properties:
+          Data:
+            type: object
+            properties:
+              InvoiceId:
+                type: integer
+              PaymentURL:
+                type: string
+              CustomerReference:
+                type: string
+    ExecutePaymentRequest:
+      type: object
+      required:
+      - InvoiceValue
+      properties:
+        PaymentMethodId:
+          type: integer
+          description: Gateway identifier from InitiatePayment (e.g., 2 for Visa/Mastercard). Required unless SessionId is provided.
+        SessionId:
+          type: string
+          description: Embedded session id. Provide instead of PaymentMethodId.
+        InvoiceValue:
+          type: number
+          description: Amount to charge; accepts decimals.
+        CallBackUrl:
+          type: string
+          maxLength: 254
+          description: Success redirect URL. localhost not allowed.
+        ErrorUrl:
+          type: string
+          maxLength: 254
+          description: Failure redirect URL. localhost not allowed.
+        CustomerName:
+          type: string
+        DisplayCurrencyIso:
+          type: string
+        CustomerEmail:
+          type: string
+        CustomerMobile:
+          type: string
+        InvoiceItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
+    GenericResponse:
+      type: object
+      description: MyFatoorah standard envelope shared by all endpoints.
+      properties:
+        IsSuccess:
+          type: boolean
+        Message:
+          type: string
+        ValidationErrors:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Error:
+                type: string
+        Data:
+          type: object
+          nullable: true
+    InitiatePaymentResponse:
+      allOf:
+      - $ref: '#/components/schemas/GenericResponse'
+      - type: object
+        properties:
+          Data:
+            type: object
+            properties:
+              PaymentMethods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PaymentMethodId:
+                      type: integer
+                    PaymentMethodEn:
+                      type: string
+                    PaymentMethodAr:
+                      type: string
+                    ServiceCharge:
+                      type: number
+                    TotalAmount:
+                      type: number
+                    IsDirectPayment:
+                      type: boolean
+                    IsEmbeddedSupported:
+                      type: boolean
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Per-country API token issued from the MyFatoorah portal (Integration Settings -> API Key). Passed as `Authorization: Bearer {token}`. Each enabled country requires its own token.'
