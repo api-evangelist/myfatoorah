@@ -1,0 +1,30 @@
+{
+  "provider": "myfatoorah",
+  "sources": [
+    "myfatoorah-invoicing-api-openapi.yml",
+    "myfatoorah-payment-status-api-openapi.yml",
+    "myfatoorah-payments-api-openapi.yml",
+    "myfatoorah-recurring-api-openapi.yml",
+    "myfatoorah-refunds-api-openapi.yml",
+    "myfatoorah-sessions-api-openapi.yml",
+    "myfatoorah-shipping-api-openapi.yml",
+    "myfatoorah-suppliers-api-openapi.yml",
+    "myfatoorah-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "myfatoorah-invoicing-api-openapi.yml",
+    "myfatoorah-payment-status-api-openapi.yml",
+    "myfatoorah-payments-api-openapi.yml",
+    "myfatoorah-recurring-api-openapi.yml",
+    "myfatoorah-refunds-api-openapi.yml",
+    "myfatoorah-sessions-api-openapi.yml",
+    "myfatoorah-shipping-api-openapi.yml",
+    "myfatoorah-suppliers-api-openapi.yml",
+    "myfatoorah-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
