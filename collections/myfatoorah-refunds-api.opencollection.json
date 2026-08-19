@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing Refunds API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Issue a full or partial refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/MakeRefund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds a paid invoice or payment, in full or partially, with an optional comment and external identifier. CONFIRMED from public documentation."
+        },
+        {
+          "info": {
+            "name": "Track refund processing status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/GetRefundStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the processing status of a previously requested refund. MODELED - endpoint is documented by name; request/response shapes here are representative."
+        },
+        {
+          "info": {
+            "name": "Refund with supplier apportionment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/MakeSupplierRefund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issues a refund on a marketplace invoice, deducting the supplier's portion. MODELED representative shape."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

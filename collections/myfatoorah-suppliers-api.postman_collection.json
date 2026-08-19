@@ -1,0 +1,162 @@
+{
+  "item": [
+    {
+      "id": "9fd3a338-10c6-4e4b-9f6f-142ebb81ba22",
+      "name": "Suppliers",
+      "description": {
+        "content": "Marketplace supplier onboarding and split settlement.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2978b9d-e8c7-4edd-ac1a-3ad871a239a5",
+          "name": "List marketplace suppliers",
+          "request": {
+            "name": "List marketplace suppliers",
+            "description": {
+              "content": "Returns the suppliers configured on the account for split settlement. MODELED representative shape.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "GetSuppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8875576e-230d-442e-97e7-24d3264b3345",
+              "name": "Suppliers list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b8a6536-dad2-4c58-a4a5-e762093058bc",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7b391d99-97b3-4b6c-b484-733af6e5a9c2",
+    "name": "MyFatoorah Invoicing Suppliers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

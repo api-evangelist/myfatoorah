@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "759c6770-12ce-4502-a1ef-f266312d39b4",
+      "name": "Payments",
+      "description": {
+        "content": "Discover payment methods and execute payments against a gateway.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c211d570-aa3e-475d-8ead-5d7a615cc42e",
+          "name": "List enabled payment methods and service charges",
+          "request": {
+            "name": "List enabled payment methods and service charges",
+            "description": {
+              "content": "Optional pre-step that returns all payment methods enabled on the account for a given amount and currency, including each method's service charge and total amount. CONFIRMED from public documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "InitiatePayment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"InvoiceAmount\": \"<number>\",\n  \"CurrencyIso\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5eed7a07-df55-4619-9864-81e6f109989b",
+              "name": "Available payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "InitiatePayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceAmount\": \"<number>\",\n  \"CurrencyIso\": \"KWD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {\n    \"PaymentMethods\": [\n      {\n        \"PaymentMethodId\": 9580,\n        \"PaymentMethodEn\": \"string\",\n        \"PaymentMethodAr\": \"string\",\n        \"ServiceCharge\": 1265.209473193588,\n        \"TotalAmount\": 3951.968501408377,\n        \"IsDirectPayment\": false,\n        \"IsEmbeddedSupported\": false\n      },\n      {\n        \"PaymentMethodId\": 6083,\n        \"PaymentMethodEn\": \"string\",\n        \"PaymentMethodAr\": \"string\",\n        \"ServiceCharge\": 3287.228341741835,\n        \"TotalAmount\": 8967.447909818111,\n        \"IsDirectPayment\": true,\n        \"IsEmbeddedSupported\": true\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4717fb4-910a-4a0e-8981-62b80b25169d",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "InitiatePayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceAmount\": \"<number>\",\n  \"CurrencyIso\": \"KWD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cefbedab-837b-473f-9b7b-d4945cb8f2c6",
+          "name": "Create an invoice against a gateway and get a PaymentURL",
+          "request": {
+            "name": "Create an invoice against a gateway and get a PaymentURL",
+            "description": {
+              "content": "Creates a MyFatoorah invoice against a chosen payment method (or an embedded SessionId) and returns a hosted PaymentURL to redirect the customer to (or to submit card details to for direct payment). CONFIRMED from public documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ExecutePayment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"PaymentMethodId\": \"<integer>\",\n  \"SessionId\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerName\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6b0c3d2-2e1b-46a2-bf9b-f846ff5c9a57",
+              "name": "Invoice created; PaymentURL returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecutePayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"PaymentMethodId\": \"<integer>\",\n  \"SessionId\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerName\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {\n    \"InvoiceId\": 4420,\n    \"PaymentURL\": \"string\",\n    \"CustomerReference\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33c53048-ee38-4056-b8f8-0b4ba539353c",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ExecutePayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"PaymentMethodId\": \"<integer>\",\n  \"SessionId\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerName\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "45eb02c5-670d-4e17-9390-289168d2e741",
+    "name": "MyFatoorah Invoicing Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "2a16d172-d52d-436c-869d-aeb0682fdc2d",
+      "name": "Sessions",
+      "description": {
+        "content": "Embedded card-entry sessions and saved-card tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b25f1e09-24db-4258-b77c-f5ceb4c9eab3",
+          "name": "Create an embedded card-entry session",
+          "request": {
+            "name": "Create an embedded card-entry session",
+            "description": {
+              "content": "Creates a session for the embedded/hosted card component so card data is entered client-side and never touches the merchant server. MODELED representative shape.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "InitiateSession"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CustomerIdentifier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5c0106b-d5ac-408a-9111-65b98b4dcb37",
+              "name": "Session created (SessionId, CountryCode).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "InitiateSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CustomerIdentifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2f30698-0ba2-4e55-a24f-6ca420869699",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "InitiateSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CustomerIdentifier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecc9c3ee-c741-4a3f-9d29-edce17b78184",
+          "name": "Remove a saved-card token",
+          "request": {
+            "name": "Remove a saved-card token",
+            "description": {
+              "content": "Deletes a stored card token associated with a customer. MODELED representative shape.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "CancelToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92f70ace-a68d-41eb-9e96-75a40be412c1",
+              "name": "Token cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CancelToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c08a21a-bb33-4590-8a1d-2ac5cb1dbc36",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "CancelToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b793f434-d06e-4539-8652-5df26abbb641",
+    "name": "MyFatoorah Invoicing Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

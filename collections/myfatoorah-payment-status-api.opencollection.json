@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing Payment Status API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Inquire on invoice/payment status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/GetPaymentStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies whether an invoice was paid and returns its transactions, keyed by InvoiceId, PaymentId, or CustomerReference. CONFIRMED from public documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

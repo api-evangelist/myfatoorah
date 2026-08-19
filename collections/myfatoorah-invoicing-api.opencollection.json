@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoicing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an invoice and generate a payment link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/SendPayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a MyFatoorah invoice and generates a shareable InvoiceURL, optionally delivered to the customer by email, SMS, or link. CONFIRMED from public documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

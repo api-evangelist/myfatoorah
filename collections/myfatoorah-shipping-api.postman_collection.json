@@ -1,0 +1,191 @@
+{
+  "item": [
+    {
+      "id": "a6cbbd91-b4b4-456e-9806-0d63dc43aac3",
+      "name": "Shipping",
+      "description": {
+        "content": "Shipping lookups, charges, and pickups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd2c26ac-ffa8-404f-8f96-f55f55b3619d",
+          "name": "List cities for a country",
+          "request": {
+            "name": "List cities for a country",
+            "description": {
+              "content": "Retrieves cities belonging to a country for shipping address selection. MODELED representative shape.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "GetCities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CountryCode\": \"<string>\",\n  \"ShippingMethod\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd1f7473-6978-4f03-aea0-8a7eefa9195e",
+              "name": "Cities list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetCities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CountryCode\": \"<string>\",\n  \"ShippingMethod\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cc3d6bf-aca5-4593-a891-b82986c1862b",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetCities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CountryCode\": \"<string>\",\n  \"ShippingMethod\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5c34389-3f3f-470d-b8be-a45068677ac5",
+    "name": "MyFatoorah Invoicing Shipping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

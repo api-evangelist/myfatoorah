@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing Recurring API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recurring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a recurring payment record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/GetRecurringPayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns details of a recurring card payment schedule. MODELED representative shape."
+        },
+        {
+          "info": {
+            "name": "Cancel a recurring payment schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/CancelRecurringPayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops future cycles of a recurring card payment. MODELED representative shape."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

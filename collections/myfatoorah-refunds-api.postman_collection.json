@@ -1,0 +1,491 @@
+{
+  "item": [
+    {
+      "id": "f7951a53-e872-4e50-9196-17c6c1e6cb3d",
+      "name": "Refunds",
+      "description": {
+        "content": "Full and partial refunds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8cbc460c-6924-4c11-bb85-9a616fee190c",
+          "name": "Issue a full or partial refund",
+          "request": {
+            "name": "Issue a full or partial refund",
+            "description": {
+              "content": "Refunds a paid invoice or payment, in full or partially, with an optional comment and external identifier. CONFIRMED from public documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MakeRefund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\",\n  \"Amount\": \"<number>\",\n  \"Comment\": \"<string>\",\n  \"ServiceChargeOnCustomer\": \"<boolean>\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"AmountDeductedFromSupplier\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e46f598-0f82-4c0a-9021-5587b8148e56",
+              "name": "Refund created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MakeRefund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\",\n  \"Amount\": \"<number>\",\n  \"Comment\": \"<string>\",\n  \"ServiceChargeOnCustomer\": \"<boolean>\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"AmountDeductedFromSupplier\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {\n    \"Key\": \"string\",\n    \"RefundId\": 6801,\n    \"RefundReference\": \"string\",\n    \"RefundInvoiceId\": \"string\",\n    \"Amount\": 1701.370147436615,\n    \"Comment\": \"string\",\n    \"ExternalIdentifier\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f6b224-1c9d-42de-a099-67812beca2e6",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MakeRefund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\",\n  \"Amount\": \"<number>\",\n  \"Comment\": \"<string>\",\n  \"ServiceChargeOnCustomer\": \"<boolean>\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"AmountDeductedFromSupplier\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1535530d-9890-433f-97e3-143affe77ca8",
+          "name": "Track refund processing status",
+          "request": {
+            "name": "Track refund processing status",
+            "description": {
+              "content": "Returns the processing status of a previously requested refund. MODELED - endpoint is documented by name; request/response shapes here are representative.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "GetRefundStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21a15311-2515-4292-a6fe-10daf10fb72e",
+              "name": "Refund status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetRefundStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "441d869a-22c5-41a2-ba6d-002a1115f143",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "GetRefundStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"KeyType\": \"<string>\",\n  \"Key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d55d9e07-5258-485f-8960-e7ddbc438ca0",
+          "name": "Refund with supplier apportionment",
+          "request": {
+            "name": "Refund with supplier apportionment",
+            "description": {
+              "content": "Issues a refund on a marketplace invoice, deducting the supplier's portion. MODELED representative shape.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MakeSupplierRefund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e66680cc-038e-4137-bb3d-d478709f6184",
+              "name": "Supplier refund created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MakeSupplierRefund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b9f41e5-fa75-4bd1-9849-707c1305c3ac",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MakeSupplierRefund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": false,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0d3eb781-7529-4a18-9e75-0101c9c9d4c3",
+    "name": "MyFatoorah Invoicing Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

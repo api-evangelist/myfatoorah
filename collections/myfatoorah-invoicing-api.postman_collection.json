@@ -1,0 +1,191 @@
+{
+  "item": [
+    {
+      "id": "d3137ef4-736a-4ff0-bc82-a9d69b9962ba",
+      "name": "Invoicing",
+      "description": {
+        "content": "Create invoices and payment links.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de4b5faa-9f9e-4093-a9d6-56d41a700501",
+          "name": "Create an invoice and generate a payment link",
+          "request": {
+            "name": "Create an invoice and generate a payment link",
+            "description": {
+              "content": "Creates a MyFatoorah invoice and generates a shareable InvoiceURL, optionally delivered to the customer by email, SMS, or link. CONFIRMED from public documentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "SendPayment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"CustomerName\": \"<string>\",\n  \"NotificationOption\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerReference\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a55b68d9-807c-42cc-a0e6-196a385e38c2",
+              "name": "Invoice created; InvoiceURL returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SendPayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"CustomerName\": \"<string>\",\n  \"NotificationOption\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerReference\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {\n    \"InvoiceId\": 2063,\n    \"InvoiceURL\": \"string\",\n    \"CustomerReference\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9454f8d6-646f-440d-b7aa-d588cca22343",
+              "name": "Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as \"The token does not have the required permissions!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SendPayment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InvoiceValue\": \"<number>\",\n  \"CustomerName\": \"<string>\",\n  \"NotificationOption\": \"<string>\",\n  \"CustomerMobile\": \"<string>\",\n  \"CustomerEmail\": \"<string>\",\n  \"DisplayCurrencyIso\": \"<string>\",\n  \"CallBackUrl\": \"<string>\",\n  \"ErrorUrl\": \"<string>\",\n  \"CustomerReference\": \"<string>\",\n  \"InvoiceItems\": [\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    },\n    {\n      \"ItemName\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsSuccess\": true,\n  \"Message\": \"string\",\n  \"ValidationErrors\": [\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    },\n    {\n      \"Name\": \"string\",\n      \"Error\": \"string\"\n    }\n  ],\n  \"Data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apitest.myfatoorah.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8708c56f-a7b0-450e-86f3-4b088cc284bf",
+    "name": "MyFatoorah Invoicing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.\n\nAccess model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account's country.\n\nEndpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah's `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.\n\nContact Support:\n Name: MyFatoorah",
+      "type": "text/plain"
+    }
+  }
+}

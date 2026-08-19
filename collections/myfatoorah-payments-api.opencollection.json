@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing Payments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List enabled payment methods and service charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/InitiatePayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Optional pre-step that returns all payment methods enabled on the account for a given amount and currency, including each method's service charge and total amount. CONFIRMED from public documentation."
+        },
+        {
+          "info": {
+            "name": "Create an invoice against a gateway and get a PaymentURL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/ExecutePayment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a MyFatoorah invoice against a chosen payment method (or an embedded SessionId) and returns a hosted PaymentURL to redirect the customer to (or to submit card details to for direct payment). CONFIRMED from public documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

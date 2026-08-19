@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MyFatoorah Invoicing Webhooks API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve triggered webhook events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apitest.myfatoorah.com/v2/GetWebhooks"
+          },
+          "docs": "Returns webhook events MyFatoorah has triggered for the account. MyFatoorah delivers notifications as HTTP POST callbacks to a merchant-configured endpoint; there is no WebSocket transport. MODELED representative shape."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
