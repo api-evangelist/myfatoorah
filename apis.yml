@@ -272,6 +272,8 @@ apis:
   humanURL: https://docs.myfatoorah.com/docs/execute-payment
   baseURL: https://api.myfatoorah.com/v2
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
