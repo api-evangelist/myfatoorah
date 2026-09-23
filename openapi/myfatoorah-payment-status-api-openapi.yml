@@ -1,13 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: MyFatoorah Invoicing Payment Status API
-  description: 'MyFatoorah is a GCC/MENA online payment gateway and invoicing platform. This OpenAPI document models a representative subset of the MyFatoorah v2 REST API: payment method discovery (InitiatePayment), invoice creation against a gateway (ExecutePayment), payment-link invoicing (SendPayment), payment status inquiry (GetPaymentStatus), refunds (MakeRefund), embedded sessions, marketplace suppliers, shipping, recurring payments, and webhook retrieval.
-
-
-    Access model: MyFatoorah uses a single shared TEST/sandbox host and separate per-country LIVE hosts (Kuwait/Bahrain/Jordan/Oman share one host; Saudi Arabia, UAE, Qatar, and Egypt each have their own). All requests are authenticated with a Bearer API token issued per country from the merchant portal (Integration Settings -> API Key). The `servers` list below enumerates the real hosts; pick the one matching your account''s country.
-
-
-    Endpoint status: InitiatePayment, ExecutePayment, SendPayment, GetPaymentStatus, and MakeRefund are CONFIRMED from the public documentation (method, path, and core request/response fields). Remaining operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow MyFatoorah''s `/v2/<Endpoint>` POST convention; their request/response schemas here are MODELED representative shapes and are marked with `x-status: modeled`. Verify exact fields against docs.myfatoorah.com before production use.'
+  title: MyFatoorah Payment Status API
+  description: MyFatoorah is a GCC/MENA online payment gateway and invoicing platform.
   version: '2.0'
   contact:
     name: MyFatoorah
@@ -57,21 +51,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GetPaymentStatusRequest:
-      type: object
-      required:
-      - Key
-      - KeyType
-      properties:
-        Key:
-          type: string
-          description: Invoice number, payment id, or customer reference value.
-        KeyType:
-          type: string
-          enum:
-          - InvoiceId
-          - PaymentId
-          - CustomerReference
     GenericResponse:
       type: object
       description: MyFatoorah standard envelope shared by all endpoints.
@@ -81,8 +60,9 @@ components:
         Message:
           type: string
         ValidationErrors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: object
             properties:
@@ -91,8 +71,9 @@ components:
               Error:
                 type: string
         Data:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
     GetPaymentStatusResponse:
       allOf:
       - $ref: '#/components/schemas/GenericResponse'
@@ -132,8 +113,24 @@ components:
                       type: string
                       description: Masked card number when applicable.
                     Error:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
+    GetPaymentStatusRequest:
+      type: object
+      required:
+      - Key
+      - KeyType
+      properties:
+        Key:
+          type: string
+          description: Invoice number, payment id, or customer reference value.
+        KeyType:
+          type: string
+          enum:
+          - InvoiceId
+          - PaymentId
+          - CustomerReference
   responses:
     Unauthorized:
       description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".

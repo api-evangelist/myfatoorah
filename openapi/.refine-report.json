@@ -1,15 +1,7 @@
 {
   "provider": "myfatoorah",
   "sources": [
-    "myfatoorah-invoicing-api-openapi.yml",
-    "myfatoorah-payment-status-api-openapi.yml",
-    "myfatoorah-payments-api-openapi.yml",
-    "myfatoorah-recurring-api-openapi.yml",
-    "myfatoorah-refunds-api-openapi.yml",
-    "myfatoorah-sessions-api-openapi.yml",
-    "myfatoorah-shipping-api-openapi.yml",
-    "myfatoorah-suppliers-api-openapi.yml",
-    "myfatoorah-webhooks-api-openapi.yml"
+    "_original/myfatoorah-openapi.yml"
   ],
   "outputs": [
     "myfatoorah-invoicing-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "myfatoorah-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "myfatoorah-invoicing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-payment-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-recurring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-shipping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "myfatoorah-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
