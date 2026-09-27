@@ -51,6 +51,43 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    SendPaymentRequest:
+      type: object
+      required:
+      - InvoiceValue
+      - CustomerName
+      - NotificationOption
+      properties:
+        InvoiceValue:
+          type: number
+        CustomerName:
+          type: string
+        NotificationOption:
+          type: string
+          description: Delivery channel for the invoice link.
+          enum:
+          - EML
+          - SMS
+          - LNK
+          - ALL
+        CustomerMobile:
+          type: string
+          description: Required when NotificationOption is SMS or ALL.
+        CustomerEmail:
+          type: string
+          description: Required when NotificationOption is EML or ALL.
+        DisplayCurrencyIso:
+          type: string
+        CallBackUrl:
+          type: string
+        ErrorUrl:
+          type: string
+        CustomerReference:
+          type: string
+        InvoiceItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceItem'
     GenericResponse:
       type: object
       description: MyFatoorah standard envelope shared by all endpoints.
@@ -97,43 +134,6 @@ components:
                 type: string
               CustomerReference:
                 type: string
-    SendPaymentRequest:
-      type: object
-      required:
-      - InvoiceValue
-      - CustomerName
-      - NotificationOption
-      properties:
-        InvoiceValue:
-          type: number
-        CustomerName:
-          type: string
-        NotificationOption:
-          type: string
-          description: Delivery channel for the invoice link.
-          enum:
-          - EML
-          - SMS
-          - LNK
-          - ALL
-        CustomerMobile:
-          type: string
-          description: Required when NotificationOption is SMS or ALL.
-        CustomerEmail:
-          type: string
-          description: Required when NotificationOption is EML or ALL.
-        DisplayCurrencyIso:
-          type: string
-        CallBackUrl:
-          type: string
-        ErrorUrl:
-          type: string
-        CustomerReference:
-          type: string
-        InvoiceItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceItem'
   responses:
     Unauthorized:
       description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".

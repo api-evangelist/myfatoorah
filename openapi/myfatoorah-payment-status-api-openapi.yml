@@ -50,30 +50,14 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
   schemas:
-    GenericResponse:
-      type: object
-      description: MyFatoorah standard envelope shared by all endpoints.
-      properties:
-        IsSuccess:
-          type: boolean
-        Message:
-          type: string
-        ValidationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              Error:
-                type: string
-        Data:
-          type:
-          - object
-          - 'null'
     GetPaymentStatusResponse:
       allOf:
       - $ref: '#/components/schemas/GenericResponse'
@@ -131,13 +115,29 @@ components:
           - InvoiceId
           - PaymentId
           - CustomerReference
-  responses:
-    Unauthorized:
-      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GenericResponse'
+    GenericResponse:
+      type: object
+      description: MyFatoorah standard envelope shared by all endpoints.
+      properties:
+        IsSuccess:
+          type: boolean
+        Message:
+          type: string
+        ValidationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Error:
+                type: string
+        Data:
+          type:
+          - object
+          - 'null'
   securitySchemes:
     bearerAuth:
       type: http

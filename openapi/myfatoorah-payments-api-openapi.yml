@@ -74,20 +74,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ExecutePaymentResponse:
-      allOf:
-      - $ref: '#/components/schemas/GenericResponse'
-      - type: object
-        properties:
-          Data:
-            type: object
-            properties:
-              InvoiceId:
-                type: integer
-              PaymentURL:
-                type: string
-              CustomerReference:
-                type: string
+    InitiatePaymentRequest:
+      type: object
+      required:
+      - InvoiceAmount
+      - CurrencyIso
+      properties:
+        InvoiceAmount:
+          type: number
+          description: Transaction amount after discounts, taxes, and adjustments.
+        CurrencyIso:
+          type: string
+          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
+          example: KWD
     GenericResponse:
       type: object
       description: MyFatoorah standard envelope shared by all endpoints.
@@ -111,28 +110,20 @@ components:
           type:
           - object
           - 'null'
-    InitiatePaymentRequest:
-      type: object
-      required:
-      - InvoiceAmount
-      - CurrencyIso
-      properties:
-        InvoiceAmount:
-          type: number
-          description: Transaction amount after discounts, taxes, and adjustments.
-        CurrencyIso:
-          type: string
-          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
-          example: KWD
-    InvoiceItem:
-      type: object
-      properties:
-        ItemName:
-          type: string
-        Quantity:
-          type: number
-        UnitPrice:
-          type: number
+    ExecutePaymentResponse:
+      allOf:
+      - $ref: '#/components/schemas/GenericResponse'
+      - type: object
+        properties:
+          Data:
+            type: object
+            properties:
+              InvoiceId:
+                type: integer
+              PaymentURL:
+                type: string
+              CustomerReference:
+                type: string
     ExecutePaymentRequest:
       type: object
       required:
@@ -167,6 +158,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceItem'
+    InvoiceItem:
+      type: object
+      properties:
+        ItemName:
+          type: string
+        Quantity:
+          type: number
+        UnitPrice:
+          type: number
     InitiatePaymentResponse:
       allOf:
       - $ref: '#/components/schemas/GenericResponse'
