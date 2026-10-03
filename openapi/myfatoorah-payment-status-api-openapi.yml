@@ -50,13 +50,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GenericResponse'
   schemas:
     GetPaymentStatusResponse:
       allOf:
@@ -100,21 +93,6 @@ components:
                       type:
                       - string
                       - 'null'
-    GetPaymentStatusRequest:
-      type: object
-      required:
-      - Key
-      - KeyType
-      properties:
-        Key:
-          type: string
-          description: Invoice number, payment id, or customer reference value.
-        KeyType:
-          type: string
-          enum:
-          - InvoiceId
-          - PaymentId
-          - CustomerReference
     GenericResponse:
       type: object
       description: MyFatoorah standard envelope shared by all endpoints.
@@ -138,6 +116,28 @@ components:
           type:
           - object
           - 'null'
+    GetPaymentStatusRequest:
+      type: object
+      required:
+      - Key
+      - KeyType
+      properties:
+        Key:
+          type: string
+          description: Invoice number, payment id, or customer reference value.
+        KeyType:
+          type: string
+          enum:
+          - InvoiceId
+          - PaymentId
+          - CustomerReference
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
   securitySchemes:
     bearerAuth:
       type: http

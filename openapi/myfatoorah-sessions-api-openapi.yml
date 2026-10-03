@@ -79,13 +79,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GenericResponse'
   schemas:
     GenericResponse:
       type: object
@@ -110,6 +103,13 @@ components:
           type:
           - object
           - 'null'
+  responses:
+    Unauthorized:
+      description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
   securitySchemes:
     bearerAuth:
       type: http

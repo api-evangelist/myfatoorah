@@ -74,19 +74,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    InitiatePaymentRequest:
-      type: object
-      required:
-      - InvoiceAmount
-      - CurrencyIso
-      properties:
-        InvoiceAmount:
-          type: number
-          description: Transaction amount after discounts, taxes, and adjustments.
-        CurrencyIso:
-          type: string
-          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
-          example: KWD
     GenericResponse:
       type: object
       description: MyFatoorah standard envelope shared by all endpoints.
@@ -158,6 +145,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceItem'
+    InitiatePaymentRequest:
+      type: object
+      required:
+      - InvoiceAmount
+      - CurrencyIso
+      properties:
+        InvoiceAmount:
+          type: number
+          description: Transaction amount after discounts, taxes, and adjustments.
+        CurrencyIso:
+          type: string
+          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
+          example: KWD
     InvoiceItem:
       type: object
       properties:

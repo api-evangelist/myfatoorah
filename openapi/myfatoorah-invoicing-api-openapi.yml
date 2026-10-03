@@ -51,6 +51,29 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    GenericResponse:
+      type: object
+      description: MyFatoorah standard envelope shared by all endpoints.
+      properties:
+        IsSuccess:
+          type: boolean
+        Message:
+          type: string
+        ValidationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Error:
+                type: string
+        Data:
+          type:
+          - object
+          - 'null'
     SendPaymentRequest:
       type: object
       required:
@@ -88,29 +111,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceItem'
-    GenericResponse:
-      type: object
-      description: MyFatoorah standard envelope shared by all endpoints.
-      properties:
-        IsSuccess:
-          type: boolean
-        Message:
-          type: string
-        ValidationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              Error:
-                type: string
-        Data:
-          type:
-          - object
-          - 'null'
     InvoiceItem:
       type: object
       properties:
