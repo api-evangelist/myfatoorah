@@ -74,29 +74,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GenericResponse:
+    InitiatePaymentRequest:
       type: object
-      description: MyFatoorah standard envelope shared by all endpoints.
+      required:
+      - InvoiceAmount
+      - CurrencyIso
       properties:
-        IsSuccess:
-          type: boolean
-        Message:
+        InvoiceAmount:
+          type: number
+          description: Transaction amount after discounts, taxes, and adjustments.
+        CurrencyIso:
           type: string
-        ValidationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              Error:
-                type: string
-        Data:
-          type:
-          - object
-          - 'null'
+          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
+          example: KWD
     ExecutePaymentResponse:
       allOf:
       - $ref: '#/components/schemas/GenericResponse'
@@ -111,6 +101,42 @@ components:
                 type: string
               CustomerReference:
                 type: string
+    InitiatePaymentResponse:
+      allOf:
+      - $ref: '#/components/schemas/GenericResponse'
+      - type: object
+        properties:
+          Data:
+            type: object
+            properties:
+              PaymentMethods:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PaymentMethodId:
+                      type: integer
+                    PaymentMethodEn:
+                      type: string
+                    PaymentMethodAr:
+                      type: string
+                    ServiceCharge:
+                      type: number
+                    TotalAmount:
+                      type: number
+                    IsDirectPayment:
+                      type: boolean
+                    IsEmbeddedSupported:
+                      type: boolean
+    InvoiceItem:
+      type: object
+      properties:
+        ItemName:
+          type: string
+        Quantity:
+          type: number
+        UnitPrice:
+          type: number
     ExecutePaymentRequest:
       type: object
       required:
@@ -145,55 +171,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceItem'
-    InitiatePaymentRequest:
+    GenericResponse:
       type: object
-      required:
-      - InvoiceAmount
-      - CurrencyIso
+      description: MyFatoorah standard envelope shared by all endpoints.
       properties:
-        InvoiceAmount:
-          type: number
-          description: Transaction amount after discounts, taxes, and adjustments.
-        CurrencyIso:
+        IsSuccess:
+          type: boolean
+        Message:
           type: string
-          description: ISO currency code (e.g., KWD, SAR, AED, QAR, EGP).
-          example: KWD
-    InvoiceItem:
-      type: object
-      properties:
-        ItemName:
-          type: string
-        Quantity:
-          type: number
-        UnitPrice:
-          type: number
-    InitiatePaymentResponse:
-      allOf:
-      - $ref: '#/components/schemas/GenericResponse'
-      - type: object
-        properties:
-          Data:
+        ValidationErrors:
+          type:
+          - array
+          - 'null'
+          items:
             type: object
             properties:
-              PaymentMethods:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    PaymentMethodId:
-                      type: integer
-                    PaymentMethodEn:
-                      type: string
-                    PaymentMethodAr:
-                      type: string
-                    ServiceCharge:
-                      type: number
-                    TotalAmount:
-                      type: number
-                    IsDirectPayment:
-                      type: boolean
-                    IsEmbeddedSupported:
-                      type: boolean
+              Name:
+                type: string
+              Error:
+                type: string
+        Data:
+          type:
+          - object
+          - 'null'
   responses:
     Unauthorized:
       description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".

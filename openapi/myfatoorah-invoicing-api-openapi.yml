@@ -51,29 +51,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GenericResponse:
-      type: object
-      description: MyFatoorah standard envelope shared by all endpoints.
-      properties:
-        IsSuccess:
-          type: boolean
-        Message:
-          type: string
-        ValidationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              Error:
-                type: string
-        Data:
-          type:
-          - object
-          - 'null'
     SendPaymentRequest:
       type: object
       required:
@@ -134,6 +111,29 @@ components:
                 type: string
               CustomerReference:
                 type: string
+    GenericResponse:
+      type: object
+      description: MyFatoorah standard envelope shared by all endpoints.
+      properties:
+        IsSuccess:
+          type: boolean
+        Message:
+          type: string
+        ValidationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Error:
+                type: string
+        Data:
+          type:
+          - object
+          - 'null'
   responses:
     Unauthorized:
       description: Missing, invalid, or insufficiently-permissioned token. MyFatoorah returns 401 with a message such as "The token does not have the required permissions!".
