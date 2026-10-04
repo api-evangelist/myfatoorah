@@ -47,7 +47,6 @@ tags:
 - MENA
 - KNET
 - mada
-- Benefits
 - Invoices
 - Cards
 - Fintech
@@ -59,7 +58,6 @@ tags_raw:
 - MENA
 - KNET
 - mada
-- Benefit
 - Invoices
 - Cards
 - Fintech
@@ -322,6 +320,9 @@ apis:
   - type: Documentation
     url: https://docs.myfatoorah.com/docs/shipping-sample-code
 common:
+- type: CapabilityMap
+  url: capabilities/myfatoorah-capability-edges.yml
+  name: MyFatoorah Business Capability Map
 - type: AgenticAccess
   url: agentic-access/myfatoorah-agentic-access.yml
 - type: DomainSecurity
@@ -345,3 +346,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-tags-removed:
+- Benefits
