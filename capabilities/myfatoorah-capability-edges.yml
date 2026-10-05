@@ -1,0 +1,46 @@
+slug: myfatoorah
+provider: MyFatoorah
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Invoicing
+  spec_file: myfatoorah-invoicing-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: POST /SendPayment  sendPayment  'Create an invoice and generate a payment link'; schemas SendPaymentRequest,
+    InvoiceItem
+  reason: Operations create customer invoices with line items and a payment link for collection, which
+    is customer invoicing and collections — Accounts Receivable Management. Not the subscription-billing
+    L2 because nothing here is subscription- or usage-rated.
+- tag: Payment Status
+  spec_file: myfatoorah-payment-status-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: POST /GetPaymentStatus  getPaymentStatus  'Inquire on invoice/payment status'
+  reason: Inquiry on whether an issued invoice has been paid supports collections and cash application,
+    i.e. Accounts Receivable Management. Confidence moderate as it is a single read-only status lookup.
+- tag: Payments
+  spec_file: myfatoorah-payments-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: POST /InitiatePayment  'List enabled payment methods and service charges'; POST /ExecutePayment  'Create
+    an invoice against a gateway and get a PaymentURL'
+  reason: Payment-method enumeration and execution of a customer payment against an invoice is receivables
+    collection / cash application for the merchant. Mapped to the cross-industry AR capability rather
+    than the subscription-billing L1, which is scoped to recurring SaaS revenue.
