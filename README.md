@@ -1,4 +1,4 @@
-# MyFatoorah (myfatoorah)
+# MyFatoorah
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,246 +64,133 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-MyFatoorah is a Kuwait-based online payment gateway and invoicing platform serving merchants across the GCC and wider MENA region (Kuwait, Saudi Arabia, UAE, Qatar, Egypt, Bahrain, Oman, and Jordan). Its v2 REST API lets businesses create invoices and payment links, execute and direct-charge card payments, run embedded checkout sessions, issue refunds, manage recurring payments, onboard marketplace suppliers, calculate shipping, and receive webhook notifications. MyFatoorah aggregates regional and international payment methods including KNET, mada, Benefit, Meeza, OmanNet, Visa, Mastercard, American Express, Apple Pay, Google Pay, and STC Pay.
+MyFatoorah is a Kuwait-based online payment gateway and invoicing platform serving merchants across the GCC and wider MENA region (Kuwait, Saudi Arabia, UAE, Qatar, Egypt, Bahrain, Oman, and Jordan). Its REST API lets businesses create invoices and payment links, execute and direct-charge card payments, run embedded checkout sessions, issue refunds, manage recurring payments, onboard marketplace suppliers, calculate shipping, and receive webhook notifications. MyFatoorah aggregates regional and international payment methods including KNET, mada, Benefit, Meeza, OmanNet, Visa, Mastercard, American Express, Apple Pay, Google Pay, and STC Pay. The API is region-scoped - a shared test host plus per-country live hosts - and authenticated with a Bearer API token.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/myfatoorah/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/myfatoorah/refs/heads/main/apis.yml)
+**Areas:** Payments · Payment Gateway · Kuwait · GCC · MENA · KNET · mada · Invoices · Cards · Fintech
 
-## Access Model (Read First)
+## MyFatoorah on APIs.io
 
-MyFatoorah's API is **region-scoped** and authenticated with a **Bearer API token**. There is no public self-serve API key for live traffic — you register a merchant account, complete KYC, and generate tokens from the portal (Integration Settings → API Key). Each enabled country requires its own token, and a token only works against endpoints it has been granted permission for (otherwise `401 - The token does not have the required permissions!`).
+Everything profiled for MyFatoorah is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/myfatoorah/](https://apis.io/providers/myfatoorah/)** — or go straight to one of the APIs or properties below.
 
-**Environments and hosts (confirmed from docs):**
+### APIs (9)
 
-| Environment / Region | API Base URL | Portal |
-|---|---|---|
-| Test / Sandbox (all regions) | `https://apitest.myfatoorah.com/` | `https://demo.myfatoorah.com/` |
-| Live — Kuwait, Bahrain, Jordan, Oman | `https://api.myfatoorah.com/` | `https://portal.myfatoorah.com/` |
-| Live — Saudi Arabia | `https://api-sa.myfatoorah.com/` | `https://sa.myfatoorah.com/` |
-| Live — UAE | `https://api-ae.myfatoorah.com/` | `https://ae.myfatoorah.com/` |
-| Live — Qatar | `https://api-qa.myfatoorah.com/` | `https://qa.myfatoorah.com/` |
-| Live — Egypt | `https://api-eg.myfatoorah.com/` | `https://eg.myfatoorah.com/` |
+- [MyFatoorah Invoicing API](https://apis.io/apis/myfatoorah/myfatoorah-invoicing-api/) — Create invoices and payment links.
+- [MyFatoorah Payment Status API](https://apis.io/apis/myfatoorah/myfatoorah-payment-status-api/) — Inquire on invoice and transaction status.
+- [MyFatoorah Payments API](https://apis.io/apis/myfatoorah/myfatoorah-payments-api/) — Discover payment methods and execute payments against a gateway.
+- [MyFatoorah Recurring API](https://apis.io/apis/myfatoorah/myfatoorah-recurring-api/) — Recurring card payment management.
+- [MyFatoorah Refunds API](https://apis.io/apis/myfatoorah/myfatoorah-refunds-api/) — Full and partial refunds.
+- [MyFatoorah Sessions API](https://apis.io/apis/myfatoorah/myfatoorah-sessions-api/) — Embedded card-entry sessions and saved-card tokens.
+- [MyFatoorah Shipping API](https://apis.io/apis/myfatoorah/myfatoorah-shipping-api/) — Shipping lookups, charges, and pickups.
+- [MyFatoorah Suppliers API](https://apis.io/apis/myfatoorah/myfatoorah-suppliers-api/) — Marketplace supplier onboarding and split settlement.
+- [MyFatoorah Webhooks API](https://apis.io/apis/myfatoorah/myfatoorah-webhooks-api/) — Retrieve webhook events triggered by MyFatoorah.
 
-Endpoints live under a `/v2` path prefix (e.g. `https://api.myfatoorah.com/v2/ExecutePayment`). The **test** environment uses a published demo token and test cards so you can integrate without moving real funds. **Pick the base host that matches your account's country** — do not assume a single global host.
+### Published properties
 
-**No WebSocket API.** MyFatoorah's public surface is REST over HTTPS. Asynchronous updates are delivered as **HTTP POST webhook callbacks** (transaction and refund status changes) to a merchant-configured URL; you can also poll `GetPaymentStatus` (which is rate limited). No `wss://` endpoint is documented. See `review.yml`.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**Confirmed vs modeled.** `InitiatePayment`, `ExecutePayment`, `SendPayment`, `GetPaymentStatus`, and `MakeRefund` are grounded (method, path, core fields) in the public docs. Other operations (sessions, suppliers, shipping, recurring, webhooks, supplier refunds, token cancellation) are documented by name and follow the `/v2/<Endpoint>` POST convention; their schemas in the OpenAPI are representative and marked `x-status: modeled`.
+#### Agentic access (1)
 
-## Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Payments
-- Payment Gateway
-- Kuwait
-- GCC
-- MENA
-- KNET
-- mada
-- Benefit
-- Invoices
-- Cards
-- Fintech
+- [Myfatoorah Agentic Access](https://apis.io/agentic-access/myfatoorah/myfatoorah-agentic-access/)
 
-## Timestamps
+#### Collections (10)
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Postman and Open Collection request collections.
 
-## APIs
+- [MyFatoorah API](https://apis.io/collections/myfatoorah/open-myfatoorah/)
+- [MyFatoorah Invoicing API](https://apis.io/collections/myfatoorah/open-myfatoorah-invoicing-api/)
+- [MyFatoorah Invoicing Payment Status API](https://apis.io/collections/myfatoorah/open-myfatoorah-payment-status-api/)
+- [MyFatoorah Invoicing Payments API](https://apis.io/collections/myfatoorah/open-myfatoorah-payments-api/)
+- [MyFatoorah Invoicing Recurring API](https://apis.io/collections/myfatoorah/open-myfatoorah-recurring-api/)
+- [MyFatoorah Invoicing Refunds API](https://apis.io/collections/myfatoorah/open-myfatoorah-refunds-api/)
+- [MyFatoorah Invoicing Sessions API](https://apis.io/collections/myfatoorah/open-myfatoorah-sessions-api/)
+- [MyFatoorah Invoicing Shipping API](https://apis.io/collections/myfatoorah/open-myfatoorah-shipping-api/)
+- [MyFatoorah Invoicing Suppliers API](https://apis.io/collections/myfatoorah/open-myfatoorah-suppliers-api/)
+- [MyFatoorah Invoicing Webhooks API](https://apis.io/collections/myfatoorah/open-myfatoorah-webhooks-api/)
 
-### MyFatoorah Payments API
+#### Security (2)
 
-Discover enabled payment methods and their service charges (InitiatePayment), then create an invoice against a chosen gateway and get a hosted PaymentURL (ExecutePayment). Supports KNET, mada, Benefit, Visa, Mastercard, Apple Pay, Google Pay, and other regional methods, with optional direct card charging.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.myfatoorah.com/docs/execute-payment](https://docs.myfatoorah.com/docs/execute-payment)
-- **Base URL:** `https://api.myfatoorah.com/v2`
+- [Myfatoorah Authentication](https://apis.io/security/myfatoorah/myfatoorah-authentication/)
+- [Myfatoorah Domain Security](https://apis.io/security/myfatoorah/myfatoorah-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Payments
-- Cards
-- KNET
-- Checkout
+Published plans, tiers and prices.
 
-#### Properties
+- [Myfatoorah Plans Pricing](https://apis.io/plans/myfatoorah/myfatoorah-plans-pricing/)
 
-- [Documentation](https://docs.myfatoorah.com/docs/initiate-payment)
-- [API Reference](https://docs.myfatoorah.com/reference)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### MyFatoorah Invoicing API
+Published request limits.
 
-Create a MyFatoorah invoice and generate a shareable payment link (SendPayment), delivered to the customer by email, SMS, or link, with line items, display currency, and success/error callback URLs.
+- [Myfatoorah Rate Limits](https://apis.io/rate-limits/myfatoorah/myfatoorah-rate-limits/)
 
-- **Human URL:** [https://docs.myfatoorah.com/docs/send-payment](https://docs.myfatoorah.com/docs/send-payment)
-- **Base URL:** `https://api.myfatoorah.com/v2`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Invoices
-- Payment Links
-- Billing
+- [Myfatoorah Finops](https://apis.io/finops/myfatoorah/myfatoorah-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.myfatoorah.com/docs/send-payment)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### MyFatoorah Payment Status API
-
-Verify whether an invoice was paid and retrieve its transactions by InvoiceId, PaymentId, or CustomerReference (GetPaymentStatus). Returns invoice status plus masked card, gateway, authorization, and error details for reconciliation.
-
-- **Human URL:** [https://docs.myfatoorah.com/docs/get-payment-status](https://docs.myfatoorah.com/docs/get-payment-status)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Payment Status
-- Inquiry
-- Reconciliation
-
-#### Properties
-
-- [Documentation](https://docs.myfatoorah.com/docs/get-payment-status)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Refunds API
-
-Issue full or partial refunds against a paid invoice or payment (MakeRefund), track refund processing (GetRefundStatus), and handle marketplace supplier refunds (MakeSupplierRefund).
-
-- **Human URL:** [https://docs.myfatoorah.com/docs/make-refund](https://docs.myfatoorah.com/docs/make-refund)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Refunds
-- Reversals
-
-#### Properties
-
-- [Documentation](https://docs.myfatoorah.com/docs/make-refund)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Embedded Sessions API
-
-Create a session for the embedded/hosted card-entry component (InitiateSession), then execute it, and manage saved-card tokens (CancelToken). Powers PCI-friendly in-page checkout that keeps card data off the merchant server.
-
-- **Human URL:** [https://docs.myfatoorah.com/docs/initiate-session](https://docs.myfatoorah.com/docs/initiate-session)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Embedded Payment
-- Sessions
-- Tokenization
-
-#### Properties
-
-- [Documentation](https://docs.myfatoorah.com/docs/initiate-session)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Suppliers API
-
-Onboard and manage marketplace suppliers for split settlements — create and edit suppliers, list them and their details, set per-method commissions, transfer balances, and view supplier deposits and dashboards.
-
-- **Human URL:** [https://docs.myfatoorah.com/reference](https://docs.myfatoorah.com/reference)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Marketplace
-- Suppliers
-- Split Payments
-
-#### Properties
-
-- [API Reference](https://docs.myfatoorah.com/reference)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Shipping API
-
-Look up shipping countries and cities, calculate DHL/Aramex shipping charges, request pickups, update shipping status, and list shipping orders alongside a MyFatoorah invoice.
-
-- **Human URL:** [https://docs.myfatoorah.com/docs/shipping-sample-code](https://docs.myfatoorah.com/docs/shipping-sample-code)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Shipping
-- Logistics
-- DHL
-- Aramex
-
-#### Properties
-
-- [Documentation](https://docs.myfatoorah.com/docs/shipping-sample-code)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Recurring Payments API
-
-Manage recurring card payments — retrieve a recurring payment record (GetRecurringPayment), cancel a schedule (CancelRecurringPayment), and resume or retry a failed cycle (ResumeRecurringPayment).
-
-- **Human URL:** [https://docs.myfatoorah.com/reference](https://docs.myfatoorah.com/reference)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Recurring
-- Subscriptions
-
-#### Properties
-
-- [API Reference](https://docs.myfatoorah.com/reference)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### MyFatoorah Webhooks API
-
-Retrieve webhook events MyFatoorah has triggered (GetWebhooks). MyFatoorah delivers transaction and refund status changes as HTTP POST callbacks to a merchant-configured endpoint; there is no WebSocket transport.
-
-- **Human URL:** [https://docs.myfatoorah.com/reference](https://docs.myfatoorah.com/reference)
-- **Base URL:** `https://api.myfatoorah.com/v2`
-
-#### Tags
-
-- Webhooks
-- Notifications
-- Events
-
-#### Properties
-
-- [API Reference](https://docs.myfatoorah.com/reference)
-- [OpenAPI](openapi/myfatoorah-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/myfatoorah.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/myfatoorah.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Domain Security](security/myfatoorah-domain-security.yml)
-- [Authentication](authentication/myfatoorah-authentication.yml)
-- [GitHub Organization](https://github.com/MyFatoorahHub)
-- [LinkedIn](https://www.linkedin.com/company/myfatoorah)
 - [Website](https://myfatoorah.com/)
 - [Documentation](https://docs.myfatoorah.com/)
-- [Plans](plans/myfatoorah-plans-pricing.yml)
-- [Rate Limits](rate-limits/myfatoorah-rate-limits.yml)
-- [Fin Ops](finops/myfatoorah-finops.yml)
+- [GitHub](https://github.com/MyFatoorahHub)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/myfatoorah/](https://apis.io/providers/myfatoorah/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for MyFatoorah: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/myfatoorah/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
